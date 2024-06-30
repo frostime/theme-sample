@@ -1,9 +1,9 @@
 {
   "name": "theme-sample",
-  "author": "Vanessa",
-  "url": "https://github.com/siyuan-note/theme-sample",
+  "author": "frostime",
+  "url": "https://github.com/frostime/theme-sample",
   "version": "0.0.3",
-  "minAppVersion": "2.8.8",
+  "minAppVersion": "3.0.0",
   "displayName": {
     "default": "Theme Sample",
     "zh_CN": "主题示例"
@@ -25,7 +25,8 @@
     ]
   },
   "modes": [
-    "light"
+    "light",
+    "dark"
   ],
   "keywords": [
     "sample", "示例"

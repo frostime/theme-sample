@@ -1,28 +1,40 @@
-name: Release
+name: CI
 
 on:
   push:
     tags:
-      - "v*"
+      - 'v*'
 
 jobs:
   build:
+
     runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
     steps:
-      # Checkout
-      - name: Checkout
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-      - name: Run script to package files
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v2
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build
+        run: npm run build
+
+      - name: Package
         run: |
-          chmod +x script/make-zip.sh
-          ./script/make-zip.sh
+          cd dist
+          zip -r ../package.zip .
 
-      - name: Release
-        uses: ncipollo/release-action@v1
+      - uses: ncipollo/release-action@v1
         with:
           allowUpdates: true
           artifactErrorsFailBuild: true
           artifacts: "package.zip"
           token: ${{ secrets.GITHUB_TOKEN }}
-          prerelease: false
